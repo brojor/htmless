@@ -2,9 +2,16 @@
   "name": "htmless",
   "version": "1.0.0",
   "packageManager": "pnpm@10.7.1",
-  "description": "A tool for cleaning HTML from attributes, script and style tags",
-  "author": "BroJor",
+  "description": "CLI tool to clean and minify HTML by removing scripts, styles, and attributes — optimized for LLM input.",
+  "author": {
+    "name": "BroJor",
+    "url": "https://brojor.me"
+  },
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/brojor/htmless.git"
+  },
   "keywords": [
     "html",
     "clean",
@@ -16,6 +23,11 @@
   "bin": {
     "htmless": "./dist/index.js"
   },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "lint": "eslint src",
