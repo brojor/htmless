@@ -74,3 +74,11 @@ Use it in a bash pipeline, before LLM processing, or to clean up WYSIWYG HTML ex
 ## 🧘 Philosophy
 
 > Less is more. Tokens are expensive. `htmless` helps LLMs process content, not the wrapper.
+
+## 👤 Author
+
+Made with ❤️ by [BroJor](https://brojor.me)
+
+## 📄 License
+
+ISC License © 2025 BroJor
