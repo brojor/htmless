@@ -1,5 +1,5 @@
 {
-  "name": "strip-html",
+  "name": "htmless",
   "version": "1.0.0",
   "packageManager": "pnpm@10.7.1",
   "description": "A tool for cleaning HTML from attributes, script and style tags",
@@ -13,7 +13,7 @@
   ],
   "main": "dist/index.js",
   "bin": {
-    "strip-html": "./dist/index.js"
+    "htmless": "./dist/index.js"
   },
   "scripts": {
     "build": "tsup",
