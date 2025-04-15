@@ -1,0 +1,25 @@
+{
+	"name": "strip-html",
+	"version": "1.0.0",
+	"description": "A tool for cleaning HTML from attributes, script and style tags",
+	"main": "dist/index.js",
+	"bin": {
+		"strip-html": "./dist/index.js"
+	},
+	"scripts": {
+		"build": "tsup"
+	},
+	"keywords": [
+		"html",
+		"clean",
+		"strip",
+		"cli"
+	],
+	"author": "BroJor",
+	"license": "ISC",
+	"packageManager": "pnpm@10.7.1",
+	"devDependencies": {
+		"tsup": "^8.4.0",
+		"typescript": "^5.8.3"
+	}
+}
