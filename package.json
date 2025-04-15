@@ -10,7 +10,7 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/brojor/htmless.git"
+    "url": "git+https://github.com/brojor/htmless.git"
   },
   "keywords": [
     "html",
@@ -21,7 +21,7 @@
   ],
   "main": "dist/index.js",
   "bin": {
-    "htmless": "./dist/index.js"
+    "htmless": "dist/index.js"
   },
   "files": [
     "LICENSE",
