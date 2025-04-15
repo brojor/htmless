@@ -9,7 +9,8 @@
     "html",
     "clean",
     "strip",
-    "cli"
+    "cli",
+    "llm"
   ],
   "main": "dist/index.js",
   "bin": {
