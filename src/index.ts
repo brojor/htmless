@@ -6,14 +6,60 @@ import * as DomSerializer from 'dom-serializer'
 import { parseDocument } from 'htmlparser2'
 import { description, name, version } from '../package.json'
 
+// Typy
+interface HtmlProcessingOptions {
+  keepWhitespace?: boolean
+}
+
+// Konstanty
+const DISALLOWED_TAGS = {
+  SECURITY: ['iframe', 'object', 'embed', 'applet'],
+  META: ['meta', 'link', 'head', 'title', 'base'],
+  FRAMES: ['frame', 'frameset', 'noframes'],
+  MEDIA: ['img', 'picture', 'source', 'video', 'audio', 'track'],
+  GRAPHICS: ['svg', 'canvas', 'map', 'area'],
+} as const
+
+// Pomocné funkce
+function isNodeAllowed(node: Node): boolean {
+  // Zakázané typy elementů
+  if (node.type === 'script' || node.type === 'style' || node.type === 'comment') {
+    return false
+  }
+
+  if (node.type === 'text') {
+    return true
+  }
+
+  if (node.type === 'tag') {
+    const tagName = (node as Element).tagName.toLowerCase()
+    const allDisallowedTags = Object.values(DISALLOWED_TAGS).flat() as string[]
+    return !allDisallowedTags.includes(tagName)
+  }
+
+  return true
+}
+
+function cleanNodeAttributes(node: Node): void {
+  if (node.type === 'tag') {
+    const element = node as Element
+    if (element.tagName.toLowerCase() === 'a') {
+      const href = element.attribs.href
+      element.attribs = href ? { href } : {}
+    }
+    else {
+      element.attribs = {}
+    }
+  }
+}
+
 function stripAndClean(nodes: Node[]): ChildNode[] {
   return nodes.filter((node): node is ChildNode => {
-    if (node.type === 'script' || node.type === 'style')
+    if (!isNodeAllowed(node)) {
       return false
-
-    if (node.type === 'tag') {
-      (node as Element).attribs = {}
     }
+
+    cleanNodeAttributes(node)
 
     if ('children' in node) {
       node.children = stripAndClean(node.children as Node[])
@@ -23,7 +69,8 @@ function stripAndClean(nodes: Node[]): ChildNode[] {
   })
 }
 
-function processHtml(inputHtml: string, { keepWhitespace = false } = {}): string {
+function processHtml(inputHtml: string, options: HtmlProcessingOptions = {}): string {
+  const { keepWhitespace = false } = options
   const dom = parseDocument(inputHtml)
   dom.children = stripAndClean(dom.children)
 
@@ -37,6 +84,7 @@ function processHtml(inputHtml: string, { keepWhitespace = false } = {}): string
         .replace(/\n/g, '')
 }
 
+// I/O funkce
 function readStdin(): Promise<string> {
   return new Promise((resolve) => {
     let data = ''
@@ -54,6 +102,7 @@ function writeFile(path: string, content: string): Promise<void> {
   return fs.promises.writeFile(path, content)
 }
 
+// Hlavní funkce
 async function main(): Promise<void> {
   const program = new Command()
     .name(name)
