@@ -1,5 +1,5 @@
 # htmless
-![npm version](https://img.shields.io/npm/v/htmless) ![npm downloads](https://img.shields.io/npm/dm/htmless) ![license](https://img.shields.io/npm/l/htmless) ![types](https://img.shields.io/npm/types/htmless) [![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
+![npm version](https://img.shields.io/npm/v/htmless) ![license](https://img.shields.io/npm/l/htmless) ![types](https://img.shields.io/npm/types/htmless) [![code style](https://antfu.me/badge-code-style.svg)](https://github.com/antfu/eslint-config)
 
 > *Lighten your HTML input. Keep the meaning, ditch the weight.*
 
